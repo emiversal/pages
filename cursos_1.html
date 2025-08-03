@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos por Categorías - Colección Completa</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/emiversal/database/bd60c35a93a8d95299bdab16b7b9a34ba5114684/favicon_classcloud.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --primary-purple: #7e22ce;
+        --primary-purple-light: #a855f7;
+        --warning-color: #f59e0b;
+        --danger-color: #ef4444;
+        --success-color: #10b981;
+        --domotica-color: #3b82f6;
+        --electronica-color: #10b981;
+        --diseno-color: #ec4899;
+        --manufactura-color: #64748b;
+        --negocios-color: #8b5cf6;
+        --musica-color: #ec4899;
+        --idiomas-color: #3b82f6;
+        --desarrollo-personal-color: #f59e0b;
+        --hogar-color: #f97316;
+        --salud-color: #ef4444;
+        --tecnologia-color: #0ea5e9;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8fafc;
+        color: #1f2937;
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+    }
+
+    .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 15px;
+    }
+
+    .header-section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #1f2937;
+    }
+
+    .section-subtitle {
+        color: #6b7280;
+        font-size: 0.95rem;
+        margin-bottom: 0;
+    }
+
+    /* Filtros */
+    .filters-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        gap: 6px;
+    }
+
+    .filter-btn {
+        border: none;
+        background: #f3f4f6;
+        color: #4b5563;
+        padding: 6px 12px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+        background: #e5e7eb;
+    }
+
+    .filter-btn.active {
+        background: var(--primary-purple);
+        color: white;
+    }
+
+    /* Barra de búsqueda */
+    .search-container {
+        position: relative;
+        max-width: 400px;
+        margin: 0 auto 20px;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
+    .search-input {
+        padding-left: 35px;
+        border-radius: 50px;
+        border: 1px solid #e5e7eb;
+        height: 38px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .search-input:focus {
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.2);
+        outline: none;
+    }
+
+    /* Grid de cursos */
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 12px;
+        margin: 0 auto;
+    }
+
+    /* Tarjetas de cursos */
+    .course-card {
+        border-radius: 10px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .course-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-img-container {
+        width: 100%;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        background-color: #f3f4f6;
+    }
+
+    .course-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .course-card:hover .course-img {
+        transform: scale(1.05);
+    }
+
+    .course-body {
+        padding: 12px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .course-badge {
+        display: inline-block;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
+        padding: 0.3em 0.6em;
+        border-radius: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        width: fit-content;
+    }
+
+    .course-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #1f2937;
+        line-height: 1.3;
+    }
+
+    .course-description {
+        font-size: 0.8rem;
+        color: #6b7280;
+        margin-bottom: 12px;
+        line-height: 1.4;
+        flex-grow: 1;
+    }
+
+    .course-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        background: var(--primary-purple);
+        color: white;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        width: fit-content;
+    }
+
+    .course-link:hover {
+        background: var(--primary-purple-light);
+        color: white;
+    }
+
+    .course-link i {
+        margin-left: 5px;
+        font-size: 0.7rem;
+    }
+
+    /* Badges por categoría */
+    .badge-programacion {
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-purple-light) 100%);
+        color: white;
+    }
+
+    .badge-ingenieria {
+        background: linear-gradient(135deg, var(--warning-color) 0%, #fbbf24 100%);
+        color: white;
+    }
+
+    .badge-robotica {
+        background: linear-gradient(135deg, var(--danger-color) 0%, #f87171 100%);
+        color: white;
+    }
+
+    .badge-domotica {
+        background: linear-gradient(135deg, var(--domotica-color) 0%, #93c5fd 100%);
+        color: white;
+    }
+
+    .badge-electronica {
+        background: linear-gradient(135deg, var(--electronica-color) 0%, #6ee7b7 100%);
+        color: white;
+    }
+
+    .badge-diseno {
+        background: linear-gradient(135deg, var(--diseno-color) 0%, #f472b6 100%);
+        color: white;
+    }
+
+    .badge-manufactura {
+        background: linear-gradient(135deg, var(--manufactura-color) 0%, #94a3b8 100%);
+        color: white;
+    }
+
+    .badge-negocios {
+        background: linear-gradient(135deg, var(--negocios-color) 0%, #a78bfa 100%);
+        color: white;
+    }
+
+    .badge-musica {
+        background: linear-gradient(135deg, var(--musica-color) 0%, #f9a8d4 100%);
+        color: white;
+    }
+
+    .badge-idiomas {
+        background: linear-gradient(135deg, var(--idiomas-color) 0%, #60a5fa 100%);
+        color: white;
+    }
+
+    .badge-desarrollo-personal {
+        background: linear-gradient(135deg, var(--desarrollo-personal-color) 0%, #fcd34d 100%);
+        color: white;
+    }
+
+    .badge-hogar {
+        background: linear-gradient(135deg, var(--hogar-color) 0%, #fb923c 100%);
+        color: white;
+    }
+
+    .badge-salud {
+        background: linear-gradient(135deg, var(--salud-color) 0%, #f87171 100%);
+        color: white;
+    }
+
+    .badge-tecnologia {
+        background: linear-gradient(135deg, var(--tecnologia-color) 0%, #7dd3fc 100%);
+        color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .courses-grid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .courses-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .main-content {
+            padding: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .courses-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+        }
+        
+        .course-title {
+            font-size: 0.85rem;
+        }
+        
+        .course-description {
+            font-size: 0.75rem;
+        }
+        
+        .course-link {
+            padding: 5px 10px;
+            font-size: 0.75rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="header-section">
+            <div class="section-title-container">
+                <h1 class="section-title"><i class="fas fa-book-open"></i> Cursos por Categoría - Colección Completa</h1>
+                <p class="section-subtitle">Explora nuestra colección completa de materiales educativos</p>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="form-control search-input" placeholder="Buscar cursos..." id="courseSearchInput">
+            </div>
+        </div>
+        
+        <div class="filters-container">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="programacion">Programación</button>
+            <button class="filter-btn" data-filter="electronica">Electrónica</button>
+            <button class="filter-btn" data-filter="ingenieria">Ingeniería</button>
+            <button class="filter-btn" data-filter="diseno">Diseño</button>
+            <button class="filter-btn" data-filter="manufactura">Manufactura</button>
+            <button class="filter-btn" data-filter="negocios">Negocios</button>
+            <button class="filter-btn" data-filter="musica">Música</button>
+            <button class="filter-btn" data-filter="idiomas">Idiomas</button>
+            <button class="filter-btn" data-filter="desarrollo-personal">Desarrollo Personal</button>
+            <button class="filter-btn" data-filter="hogar">Hogar</button>
+            <button class="filter-btn" data-filter="tecnologia">Tecnología</button>
+            <button class="filter-btn" data-filter="salud">Salud</button>
+        </div>
+        
+        <div class="courses-grid" id="coursesContainer">
+            <!-- Los cursos se cargarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para funcionalidades -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const coursesData = [
+            {
+                "id": 42,
+                "title": "Diseño Gráfico",
+                "description": "Aprende los fundamentos del diseño gráfico y herramientas profesionales.",
+                "image": "img/42.png",
+                "link": "https://drive.google.com/drive/folders/1WzVLVcfKO199H18YuLtc0gSOAGWtw7HA?direction=a",
+                "category": "diseno"
+            },
+            {
+                "id": 43,
+                "title": "Office",
+                "description": "Domina las herramientas de Microsoft Office para productividad.",
+                "image": "img/43.png",
+                "link": "https://drive.google.com/drive/folders/1hjGMrTWu746SYZ4Yd5Olb4GyGju_vzS1",
+                "category": "programacion"
+            },
+            {
+                "id": 44,
+                "title": "Inglés",
+                "description": "Curso completo de inglés desde nivel básico hasta avanzado.",
+                "image": "img/44.png",
+                "link": "https://drive.google.com/drive/folders/1VH1Abk6-371kKpCKwOlhE8kRA-bYwwni",
+                "category": "idiomas"
+            },
+            {
+                "id": 45,
+                "title": "Curso Excel Completo",
+                "description": "Aprende Excel desde cero hasta nivel avanzado.",
+                "image": "img/45.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FrUdUwBCQ%23EwSM4heDhNFig4L-XWz_QQ&sa=D&sntz=1&usg=AOvVaw0AAPL-IzXQXZgzoK5obTSA",
+                "category": "programacion"
+            },
+            {
+                "id": 46,
+                "title": "Aula Virtual",
+                "description": "Recursos para crear y gestionar aulas virtuales educativas.",
+                "image": "img/46.png",
+                "link": "https://drive.google.com/drive/folders/11Jtp6Tkcz5p1nHSE2WE4yzPTQPcXbsrl",
+                "category": "programacion"
+            },
+            {
+                "id": 47,
+                "title": "Hacking Ético",
+                "description": "Aprende técnicas de hacking ético y seguridad informática.",
+                "image": "img/47.png",
+                "link": "https://drive.google.com/drive/folders/1ryvm6yUA7xZa-aWKH0f_70YKJ1B33TpW",
+                "category": "programacion"
+            },
+            {
+                "id": 48,
+                "title": "Marketing Digital",
+                "description": "Estrategias de marketing digital para redes sociales y web.",
+                "image": "img/48.png",
+                "link": "https://drive.google.com/drive/folders/1Bs65PGYQJu33CW2MCdVdmAnXe4kI23k4",
+                "category": "negocios"
+            },
+            {
+                "id": 49,
+                "title": "Gastronomía",
+                "description": "Curso completo de cocina y técnicas gastronómicas.",
+                "image": "img/49.png",
+                "link": "https://drive.google.com/drive/folders/1GHdANHZFXrtDYtIX1SDzfOuvFVzCdSje",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 50,
+                "title": "Super Memoria",
+                "description": "Técnicas para mejorar la memoria y el aprendizaje acelerado.",
+                "image": "img/50.png",
+                "link": "https://drive.google.com/drive/folders/1GwojI4d_O6pcZqIVzcIZdDlv1URone1j",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 51,
+                "title": "Producción Musical",
+                "description": "Aprende a producir música con herramientas digitales.",
+                "image": "img/51.png",
+                "link": "https://drive.google.com/drive/folders/1jMGwA5st-Z1X498a5gtR__AQoVNJpnHa",
+                "category": "musica"
+            },
+            {
+                "id": 52,
+                "title": "Ingeniería",
+                "description": "Recursos y cursos varios sobre ingeniería.",
+                "image": "img/52.png",
+                "link": "https://drive.google.com/drive/folders/1jB7_1zjEt_2_h1qpB44OH9YfozS4axMB",
+                "category": "ingenieria"
+            },
+            {
+                "id": 53,
+                "title": "Cursos De Hacking Y Programación",
+                "description": "Colección de cursos sobre hacking y programación.",
+                "image": "img/53.png",
+                "link": "https://drive.google.com/drive/folders/1ALUuI9f3-EH9gBG15gCdWyBxS8qhMb9L",
+                "category": "programacion"
+            },
+            {
+                "id": 54,
+                "title": "Autocad Desde Cero - Proyectos",
+                "description": "Aprende AutoCAD desde cero con proyectos prácticos.",
+                "image": "img/54.png",
+                "link": "https://drive.google.com/drive/folders/1FusnOPIg9kq77a4VeuAh-mrQx0DTj7dH",
+                "category": "diseno"
+            },
+            {
+                "id": 55,
+                "title": "Arquitectura",
+                "description": "Curso completo sobre fundamentos de arquitectura.",
+                "image": "img/55.png",
+                "link": "https://drive.google.com/drive/folders/1O8Jt_XkdDhdvf4i7ZjPDmz1fRWFvJkYY",
+                "category": "diseno"
+            },
+            {
+                "id": 56,
+                "title": "Consola Móvil",
+                "description": "Curso sobre desarrollo de aplicaciones para consolas móviles.",
+                "image": "img/56.png",
+                "link": "https://drive.google.com/drive/folders/1rap1MmWNzvO16nZAmbpoq-c-4VARDRE6",
+                "category": "programacion"
+            },
+            {
+                "id": 57,
+                "title": "Desarrollo Web",
+                "description": "Aprende desarrollo web frontend y backend.",
+                "image": "img/57.png",
+                "link": "https://drive.google.com/drive/folders/1C8SWhakZITTD55FIBufmXZgwtplmxmA8",
+                "category": "programacion"
+            },
+            {
+                "id": 58,
+                "title": "Psicología",
+                "description": "Curso introductorio a la psicología.",
+                "image": "img/58.png",
+                "link": "https://drive.google.com/drive/folders/1NKLDY7-BGNBGE26CCzx28Wm6mKQfDyzQ",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 59,
+                "title": "Canva De 0 A Pro",
+                "description": "Domina Canva para crear diseños profesionales.",
+                "image": "img/59.png",
+                "link": "https://drive.google.com/drive/folders/1RzdEYeK1T7ljrtrNJRvhcuJj4iosu2NS?usp=sharing",
+                "category": "diseno"
+            },
+            {
+                "id": 60,
+                "title": "Armado De Pc",
+                "description": "Aprende a armar y reparar computadoras.",
+                "image": "img/60.png",
+                "link": "https://drive.google.com/drive/folders/1KsmDSpCejs6MU4yimuPLVXLoFCDhcX7C",
+                "category": "electronica"
+            },
+            {
+                "id": 61,
+                "title": "Guitarra Acústica",
+                "description": "Curso completo para aprender a tocar guitarra acústica.",
+                "image": "img/61.png",
+                "link": "https://drive.google.com/drive/folders/1jmrD-e0QZUQ9RSNXnIcucBY32FnDNJzw?fbclid=IwAR3QvL21szDOdeRCpF-MUSigQvqH2pWaNdm2NMXnsrW-k3ZPaSLMCb1El3E",
+                "category": "musica"
+            },
+            {
+                "id": 62,
+                "title": "Pre Universitario",
+                "description": "Preparación para exámenes universitarios.",
+                "image": "img/62.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2F8Fs1lT6J%233leNMvWbFV8cbSCrPI2w0g&sa=D&sntz=1&usg=AOvVaw1qSRL2XTdZ0y-m1Hl6yznC",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 63,
+                "title": "Fotografía",
+                "description": "Curso completo de fotografía digital.",
+                "image": "img/63.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2Fa9xyCZaR%23A75XK1Jju7s4rKMjWod79g&sa=D&sntz=1&usg=AOvVaw2mNQYhZmSnDxKp1ToH5b-0",
+                "category": "diseno"
+            },
+            {
+                "id": 64,
+                "title": "Curso De Dibujo Completo",
+                "description": "Aprende técnicas de dibujo desde cero.",
+                "image": "img/64.png",
+                "link": "https://drive.google.com/drive/folders/12hHAYRYangVF5pVrVfrJi3C-R_SYFsfz?fbclid=IwY2xjawJMEThleHRuA2FlbQIxMAABHXPUFtMsc5_pLR7ebSG1vuCCmUY9gB4ZafBKNIosEIJ5emsOdaXs8tuenA_aem_IYrwz9zgUFZUtIFoJJdgmw",
+                "category": "diseno"
+            },
+            {
+                "id": 65,
+                "title": "Lectura Rápida",
+                "description": "Técnicas para aumentar la velocidad de lectura.",
+                "image": "img/65.png",
+                "link": "https://drive.google.com/drive/folders/16iCYyStyJGQObIwtmU9u9SDkC4eSiAnf?usp=sharing",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 66,
+                "title": "Curso De Argis",
+                "description": "Aprende a usar Argis para sistemas de información geográfica.",
+                "image": "img/66.png",
+                "link": "https://drive.google.com/drive/folders/162_08ElD58zu5Adu3qywakKCjGH_NFnF",
+                "category": "diseno"
+            },
+            {
+                "id": 67,
+                "title": "Dibujo A Lápiz De Principiante A Experto",
+                "description": "Domina el dibujo a lápiz con técnicas profesionales.",
+                "image": "img/67.png",
+                "link": "https://drive.google.com/drive/folders/1kTLO3LGHwFpXy3Ncl4YDkjNp6Geaza49",
+                "category": "diseno"
+            },
+            {
+                "id": 68,
+                "title": "Dibujo E Ilustración",
+                "description": "Curso completo de dibujo e ilustración digital.",
+                "image": "img/68.png",
+                "link": "https://drive.google.com/drive/folders/1-TX0yk1Fdji4f44JESTC5HPfMoitgLB2",
+                "category": "diseno"
+            },
+            {
+                "id": 69,
+                "title": "Como Crear Tu Iman De Prospecto",
+                "description": "Técnicas de marketing y atracción de clientes.",
+                "image": "img/69.png",
+                "link": "https://drive.google.com/drive/u/0/mobile/folders/1MBLSw9MsnY2UTReMUD3irtshuf-idt0t",
+                "category": "negocios"
+            },
+            {
+                "id": 70,
+                "title": "Inteligencia Artificial",
+                "description": "Introducción a la inteligencia artificial y machine learning.",
+                "image": "img/70.png",
+                "link": "https://drive.google.com/drive/folders/1DDX0-pdhKtBGTA84trDT1yfZpzfr5Jo8",
+                "category": "programacion"
+            },
+            {
+                "id": 71,
+                "title": "Curso De Adiestramiento Canino",
+                "description": "Aprende técnicas profesionales para adiestrar perros.",
+                "image": "img/71.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1hRxlN5jilbgphOlNFzgOEN1AVgqLFkNz",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 72,
+                "title": "Programación En Java",
+                "description": "Curso completo de programación en Java.",
+                "image": "img/72.png",
+                "link": "https://drive.google.com/drive/folders/1IZRxm6pbSnBzVy3A0ZWxNdz4DNJnXeAu",
+                "category": "programacion"
+            },
+            {
+                "id": 73,
+                "title": "Exploring Jazz - Piano Vol I Y II",
+                "description": "Curso de piano jazz para principiantes y avanzados.",
+                "image": "img/73.png",
+                "link": "https://drive.google.com/drive/folders/1k-hOeIh00tgwlHTl7vrkoZHcC83ibE95",
+                "category": "musica"
+            },
+            {
+                "id": 74,
+                "title": "Cursos De Corte Y Confección 1",
+                "description": "Aprende técnicas de costura y confección de ropa.",
+                "image": "img/74.png",
+                "link": "https://drive.google.com/drive/folders/1rPkkjhEUEYKekq47YvDz_cuWj0xb7MdS",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 75,
+                "title": "Curso De Barista",
+                "description": "Aprende el arte de preparar café como un profesional.",
+                "image": "img/75.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1JWAK7dayq59d0LlI69nQD6rmoXQjKRyN",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 76,
+                "title": "Reparación De Aires Acondicionados",
+                "description": "Aprende a reparar y mantener sistemas de aire acondicionado.",
+                "image": "img/76.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fwww.1024tera.com%2Fspanish%2Fsharing%2Flink%3Fsurl%3DTPKi1LY-MLnzDPK3Aa769w&sa=D&sntz=1&usg=AOvVaw1HlJVjMqPmLONER9JQjjm1",
+                "category": "electronica"
+            },
+            {
+                "id": 77,
+                "title": "Masterclass Oratoria",
+                "description": "Mejora tus habilidades de hablar en público.",
+                "image": "img/77.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1bjD8CQUcVJo-LR5x1qcJyaZlZZJ3i53G",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 78,
+                "title": "Cursos De Hacking Y Programación 2",
+                "description": "Más cursos avanzados sobre hacking y programación.",
+                "image": "img/78.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FS8xxnarD%23bAu0mZkgHfGGVDczwLUVcA&sa=D&sntz=1&usg=AOvVaw34UWR8SybdyYTciJYhuYis",
+                "category": "programacion"
+            },
+            {
+                "id": 79,
+                "title": "Curso De Hacking De Frecuencias - S4Vitar",
+                "description": "Curso especializado en hacking de frecuencias.",
+                "image": "img/79.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1j8xrwA-PRcRxmJum_NOrNtNbTEJIarVq",
+                "category": "programacion"
+            },
+            {
+                "id": 80,
+                "title": "Training Hacking Offensive",
+                "description": "Entrenamiento en hacking ofensivo y seguridad.",
+                "image": "img/80.png",
+                "link": "https://drive.google.com/drive/folders/1nH7Ahtob4D4gh_waDO_mlPqNLNinbGHS",
+                "category": "programacion"
+            },
+            {
+                "id": 81,
+                "title": "Maestro De La Seducción",
+                "description": "Técnicas de seducción y relaciones interpersonales.",
+                "image": "img/81.png",
+                "link": "https://drive.google.com/drive/folders/1YVERVJB8RpNy_byssT3CK1u2U_uW91vN",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 82,
+                "title": "Lenguaje De Programación",
+                "description": "Curso sobre diversos lenguajes de programación.",
+                "image": "img/82.png",
+                "link": "https://drive.google.com/drive/folders/1uIfEmx1nbZxE0NXFjCRK86doWl2GLMzW?usp=sharing",
+                "category": "programacion"
+            },
+            {
+                "id": 83,
+                "title": "Curso De Computación",
+                "description": "Fundamentos de computación para principiantes.",
+                "image": "img/83.png",
+                "link": "https://sites.google.com/maxzimedia.net/maxzimedia/curso-computacion-basica",
+                "category": "programacion"
+            },
+            {
+                "id": 84,
+                "title": "Estética Canina",
+                "description": "Aprende técnicas de peluquería y estética para perros.",
+                "image": "img/84.png",
+                "link": "https://drive.google.com/drive/folders/1zHniIJ5ymOgSuDCiLe-e3vyAKB7M4-Iy",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 85,
+                "title": "Escuela Masterchef",
+                "description": "Curso de cocina al estilo Masterchef.",
+                "image": "img/85.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1ggu1q5ToX1IsyKo93y0cp25cFg6S4KSF",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 86,
+                "title": "Como Crear Cursos (John Dani)",
+                "description": "Aprende a crear y vender cursos online.",
+                "image": "img/86.png",
+                "link": "https://drive.google.com/drive/u/0/folders/18TsI_hy7tfrO_1EL-4nOpXmiYYmAH6sM",
+                "category": "negocios"
+            },
+            {
+                "id": 87,
+                "title": "Daygame Mastery (Seducción)",
+                "description": "Técnicas avanzadas de seducción durante el día.",
+                "image": "img/87.png",
+                "link": "https://drive.google.com/drive/folders/1JYaCFtF2aQqOlZKTRB6nmjXe3ZQyQjFS",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 88,
+                "title": "Reparación De Impresoras",
+                "description": "Aprende a reparar impresoras de diferentes marcas.",
+                "image": "img/88.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1BCf4FzjqGuIGvr7vioETyXzVWH6_ejfO?fbclid=IwAR3Kx3GuQShgm0aM600wzwOnBzwzj9pzHL0FFQW7yfY0362HIu7IwUKjWjk",
+                "category": "electronica"
+            },
+            {
+                "id": 89,
+                "title": "Curso De Programación",
+                "description": "Curso general de programación para principiantes.",
+                "image": "img/89.png",
+                "link": "https://drive.google.com/drive/folders/1o_njE2B908GSrGNvrQ_I89qnadm_RkIc",
+                "category": "programacion"
+            },
+            {
+                "id": 90,
+                "title": "Curso De Administración De Restaurantes",
+                "description": "Aprende a gestionar y administrar un restaurante.",
+                "image": "img/90.png",
+                "link": "https://drive.google.com/drive/mobile/folders/1Unv5IO868b9_bmYzDema4pTcc9aOgtk8?usp=share_link",
+                "category": "negocios"
+            },
+            {
+                "id": 91,
+                "title": "Hablar Para Vender Alvaro Mendoza",
+                "description": "Técnicas de venta y persuasión verbal.",
+                "image": "img/91.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FUnZXFazT%23Zwnz256vmIzPR0KHYFohfQ&sa=D&sntz=1&usg=AOvVaw3cxbeNCWk8b29iNVIszaXG",
+                "category": "negocios"
+            },
+            {
+                "id": 92,
+                "title": "Master Ventas Luis Eduardo Varon",
+                "description": "Curso avanzado de técnicas de ventas.",
+                "image": "img/92.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiGpSTDBL%23u62EYZXb7KUy9w3HX1qMaw%2Ffolder%2F3DY0nDDD&sa=D&sntz=1&usg=AOvVaw2CHNk19MjnPfPjFJBGolJn",
+                "category": "negocios"
+            },
+            {
+                "id": 93,
+                "title": "Mecánica Automotriz Para Principiantes",
+                "description": "Aprende los fundamentos de mecánica automotriz.",
+                "image": "img/93.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FvgAjmKyI%23KHuWY_5tcwEK02xM28Dz4A%2Ffolder%2F21pXQAIJ&sa=D&sntz=1&usg=AOvVaw0uxA3fcnoB_vFHpeqCeO8j",
+                "category": "ingenieria"
+            },
+            {
+                "id": 94,
+                "title": "Colección Robert Kiyosaki",
+                "description": "Libros y cursos sobre finanzas personales.",
+                "image": "img/94.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1Zi_AFE1vrXZ8NUe71pQzENevBaWVo4p3",
+                "category": "negocios"
+            },
+            {
+                "id": 95,
+                "title": "Como Entender Contabilidad Sin Ser Contador",
+                "description": "Fundamentos de contabilidad para no especialistas.",
+                "image": "img/95.png",
+                "link": "https://drive.google.com/drive/folders/1c6w4FcG00AL1m9buGFzQjJW9wJqIoYRi",
+                "category": "negocios"
+            },
+            {
+                "id": 96,
+                "title": "Curso De Ingles Vaughan Básico",
+                "description": "Curso de inglés nivel básico con método Vaughan.",
+                "image": "img/96.png",
+                "link": "https://drive.google.com/drive/folders/1EnWJZ3lRPVHOzV1sl0meeIp5gJxuCFzn?usp=sharing",
+                "category": "idiomas"
+            },
+            {
+                "id": 97,
+                "title": "Curso De Ingles Vaughan Intermedio",
+                "description": "Curso de inglés nivel intermedio con método Vaughan.",
+                "image": "img/97.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2Frx9CRKxZ%23BfByY0iorh5TMXCeChWvdA&sa=D&sntz=1&usg=AOvVaw0BxTjDdRTbkI-SCPhk-b1-",
+                "category": "idiomas"
+            },
+            {
+                "id": 98,
+                "title": "Curso De Ingles Vaughan Avanzado",
+                "description": "Curso de inglés nivel avanzado con método Vaughan.",
+                "image": "img/98.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FQY1CCJiL%23bH_cxPBDfL9jWbCpe9ms0Q&sa=D&sntz=1&usg=AOvVaw3XhTdy9q0fFj9YGCnnepJb",
+                "category": "idiomas"
+            },
+            {
+                "id": 99,
+                "title": "Curso Manejo De La Frustración",
+                "description": "Técnicas para manejar la frustración y el estrés.",
+                "image": "img/99.png",
+                "link": "https://drive.google.com/file/d/1F7gY5Ur6-BJcr8yROIXBIxOcqvDicII2/view?usp=sharing",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 100,
+                "title": "Mi Primera Pagina Web",
+                "description": "Aprende a crear tu primera página web desde cero.",
+                "image": "img/100.png",
+                "link": "https://drive.google.com/drive/folders/16ux1FpQxAsvhf4Hkx_N8g_6lyijLCIlC?usp=sharing",
+                "category": "programacion"
+            },
+            {
+                "id": 101,
+                "title": "Reparación Y Mantenimiento De Herramientas Eléctricas",
+                "description": "Aprende a reparar herramientas eléctricas comunes.",
+                "image": "img/101.png",
+                "link": "https://drive.google.com/drive/folders/1y22mDMvDzitnZWUHvKNRAbxknoYymkmn",
+                "category": "electronica"
+            },
+            {
+                "id": 102,
+                "title": "Especialista En Publicidad Digital",
+                "description": "Curso avanzado de publicidad en redes sociales.",
+                "image": "img/102.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1WEl5DbT1MBsBVIJBWQWXoQKU0EPBjr6P",
+                "category": "negocios"
+            },
+            {
+                "id": 103,
+                "title": "Curso De Jardinería",
+                "description": "Aprende técnicas de jardinería y paisajismo.",
+                "image": "img/103.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2Fot4BFZJZ%23lMQV-A5ud_TpZd-7uEaExw&sa=D&sntz=1&usg=AOvVaw1XSZ9oGQzPObZnpkiX1Yht",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 104,
+                "title": "Curso De Adobe Suit",
+                "description": "Domina las herramientas de Adobe para diseño gráfico.",
+                "image": "img/104.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1h6GyxArDv2y_3iTshgJYikrStjDOuG-T",
+                "category": "diseno"
+            },
+            {
+                "id": 105,
+                "title": "Carpintería En Aluminio",
+                "description": "Técnicas de carpintería especializada en aluminio.",
+                "image": "img/105.png",
+                "link": "https://drive.google.com/drive/folders/1lizfqRwlx0vVfez8M2P5i_3nPsKEEwQC",
+                "category": "manufactura"
+            },
+            {
+                "id": 106,
+                "title": "Curso Completo De Instalaciones Eléctricas Residenciales",
+                "description": "Aprende a instalar sistemas eléctricos en viviendas.",
+                "image": "img/106.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1-g_sTzcK5nxzP2UIgdPtRUuINAsCi8cw",
+                "category": "electronica"
+            },
+            {
+                "id": 107,
+                "title": "Tarjetas De Crédito Con Inteligencia",
+                "description": "Aprende a manejar tarjetas de crédito de forma inteligente.",
+                "image": "img/107.png",
+                "link": "https://drive.google.com/drive/folders/1IXrDPBfo4JpMq_1Geg6qYlm5Mj2u6QWc",
+                "category": "negocios"
+            },
+            {
+                "id": 108,
+                "title": "Master Class Habla Con Poder",
+                "description": "Técnicas para hablar en público con confianza.",
+                "image": "img/108.png",
+                "link": "https://drive.google.com/drive/folders/197zdDuZaM4ZhaJWAEpeJTUO4ZPs9_f40",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 109,
+                "title": "Curso De Confección (Crehana)",
+                "description": "Técnicas de costura y confección de ropa.",
+                "image": "img/109.png",
+                "link": "https://drive.google.com/drive/folders/1RTJGUu9a7tfq4ENzQV5AJlw62SAxb9iy",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 110,
+                "title": "Curso De Artesanía",
+                "description": "Aprende diversas técnicas artesanales.",
+                "image": "img/110.png",
+                "link": "https://drive.google.com/drive/folders/1jEDcLfV_O7tMJ_3t6pSPU5Ne-QfhIaxc",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 111,
+                "title": "Como Tener Mas Seguidores En Tiktok",
+                "description": "Estrategias para crecer en la plataforma TikTok.",
+                "image": "img/111.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1gV7Zx9NSbyimrfvB70q55aUqKsNfpZhf",
+                "category": "negocios"
+            },
+            {
+                "id": 112,
+                "title": "Presentaciones De Alto Impacto En Power Point [Udemy]",
+                "description": "Crea presentaciones profesionales en PowerPoint.",
+                "image": "img/112.png",
+                "link": "https://drive.google.com/drive/folders/19Ys77gAE8arazK90jRcWxnB_HUjZm7Ih",
+                "category": "programacion"
+            },
+            {
+                "id": 113,
+                "title": "Bienes Raíces",
+                "description": "Curso sobre inversión en bienes raíces.",
+                "image": "img/113.png",
+                "link": "https://drive.google.com/drive/folders/1nfMA72hL1PHFTWVkzjlSBAmfPyBg89dx",
+                "category": "negocios"
+            },
+            {
+                "id": 114,
+                "title": "Curso Habla Koreano",
+                "description": "Aprende coreano desde nivel básico.",
+                "image": "img/114.png",
+                "link": "https://drive.google.com/drive/folders/17JlL2Xo-LMvodyiJFMEQXQCbcmVhguNc",
+                "category": "idiomas"
+            },
+            {
+                "id": 115,
+                "title": "En Mantenimiento",
+                "description": "Curso actualmente en mantenimiento.",
+                "image": "img/115.png",
+                "link": "SIN ENLACE",
+                "category": "programacion"
+            },
+            {
+                "id": 116,
+                "title": "Tiktok Ads",
+                "description": "Curso sobre publicidad en TikTok.",
+                "image": "img/116.png",
+                "link": "https://drive.google.com/drive/folders/1oPbJu2trhzP98Bdy50-1A-cfAAZCREUt?usp=sharing",
+                "category": "negocios"
+            },
+            {
+                "id": 117,
+                "title": "Cursos Musicales",
+                "description": "Colección de cursos sobre teoría y práctica musical.",
+                "image": "img/117.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1dY_bUwQIgXbDD8I3w2JIP_udmHbdGdGR",
+                "category": "musica"
+            },
+            {
+                "id": 118,
+                "title": "Curso Revit 2025",
+                "description": "Aprende a usar Revit para modelado BIM.",
+                "image": "img/118.png",
+                "link": "https://sites.google.com/maxzimedia.net/maxzimedia/curso-revit-2025",
+                "category": "diseno"
+            },
+            {
+                "id": 119,
+                "title": "Master En Publicidad",
+                "description": "Curso avanzado de estrategias publicitarias.",
+                "image": "img/119.png",
+                "link": "https://sites.google.com/maxzimedia.net/maxzimedia/master-en-publicidad",
+                "category": "negocios"
+            },
+            {
+                "id": 120,
+                "title": "Hacking Android",
+                "description": "Técnicas de hacking y seguridad para dispositivos Android.",
+                "image": "img/120.png",
+                "link": "https://drive.google.com/drive/folders/1c-4Uffy3hK8w8bbyhaJ9MlP8eeDWL144",
+                "category": "programacion"
+            },
+            {
+                "id": 121,
+                "title": "Hipnosis Rápida Para El Desarrollo Personal",
+                "description": "Técnicas de hipnosis para crecimiento personal.",
+                "image": "img/121.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FzUkREIYQ%23eHO_IweiBkajpNOpoRZIhA%2Ffolder%2FiEFUBDAZ&sa=D&sntz=1&usg=AOvVaw0utM9PXVBcScXaB9lFCw-K",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 122,
+                "title": "Curso Melamina Y Planos 1",
+                "description": "Técnicas de trabajo con melamina y diseño de planos.",
+                "image": "img/122.png",
+                "link": "https://drive.google.com/drive/folders/1xWhI6l4U8YPxu705LINOVDnDdw8K8Vzh?direction=a",
+                "category": "diseno"
+            },
+            {
+                "id": 123,
+                "title": "Curso Melamina Y Planos 2",
+                "description": "Segunda parte del curso de melamina y planos.",
+                "image": "img/123.png",
+                "link": "https://drive.google.com/drive/folders/1FvcQEThIA1ExV40gRvMHiXtP-8KEIa5c",
+                "category": "diseno"
+            },
+            {
+                "id": 124,
+                "title": "47 Lecciones De Inglés",
+                "description": "Curso completo de inglés con 47 lecciones.",
+                "image": "img/124.png",
+                "link": "https://drive.google.com/drive/folders/1EFtviBTWEok_tN-GGMC027MKJCOUYjw0",
+                "category": "idiomas"
+            },
+            {
+                "id": 125,
+                "title": "Curso Melamina Y Planos 3",
+                "description": "Tercera parte del curso de melamina y planos.",
+                "image": "img/125.png",
+                "link": "https://drive.google.com/drive/mobile/folders/1clcHLS2XY2U-7yxjH1ODGY3nd_F-EjlO?usp=sharing&fbclid=IwAR1HqJdvjun7593kQDBAw4MfCZ06hReTxpGP9eL-Qa6PTL8Wp44vbkyJPDM",
+                "category": "diseno"
+            },
+            {
+                "id": 126,
+                "title": "Deep Web Y Dark Web Curso Completo",
+                "description": "Introducción a la deep web y dark web con medidas de seguridad.",
+                "image": "img/126.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FAlVFyIST%23lIrIDErdjmQ3D_zKYkvE5g&sa=D&sntz=1&usg=AOvVaw0Ex3wQDbqsakT6Czn5W0Aj",
+                "category": "programacion"
+            },
+            {
+                "id": 127,
+                "title": "Mecánica De Motos",
+                "description": "Aprende a reparar y mantener motocicletas.",
+                "image": "img/127.png",
+                "link": "https://drive.google.com/drive/folders/1XMkt74zXJZwy4WFMiYUOXQaGv8qUtbl7",
+                "category": "ingenieria"
+            },
+            {
+                "id": 128,
+                "title": "Pintura De Países Urbanos En Acuarela",
+                "description": "Técnicas de pintura en acuarela de paisajes urbanos.",
+                "image": "img/128.png",
+                "link": "https://drive.google.com/drive/folders/1r-p9LTlsrkqlFd5t9AxD3GR8kUFkYZPq",
+                "category": "diseno"
+            },
+            {
+                "id": 129,
+                "title": "Curso Chat GPT Sessions",
+                "description": "Aprende a usar ChatGPT para diversos propósitos.",
+                "image": "img/129.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FbNVUAS5T%23maoWnzK_HTiTUOluw8Auyg&sa=D&sntz=1&usg=AOvVaw1IdpqcGppHQTGoOO1FdkaM",
+                "category": "programacion"
+            },
+            {
+                "id": 130,
+                "title": "Curso De Manejo De Herramientas Eléctricas",
+                "description": "Aprende a usar herramientas eléctricas de forma segura.",
+                "image": "img/130.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fwww.terabox.best%2Fspanish%2Fsharing%2Flink%3Fsurl%3DkoJriHlx2eYW10a9_bUkTQ&sa=D&sntz=1&usg=AOvVaw1NcBEt9VolUBeg5AQjMcwC",
+                "category": "electronica"
+            },
+            {
+                "id": 131,
+                "title": "Curso De Nutrición Para Ganar Masa Muscular",
+                "description": "Planificación nutricional para aumento de masa muscular.",
+                "image": "img/131.png",
+                "link": "https://drive.google.com/drive/folders/1-xARy8NTqit486qbqorfFcNClzyAe5Oz",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 132,
+                "title": "Curso De Matemática Financiera",
+                "description": "Fundamentos de matemáticas aplicadas a las finanzas.",
+                "image": "img/132.png",
+                "link": "https://drive.google.com/drive/folders/1x8Z0V-v8j-GvOVph-59I5Zuq2zbAnUQ1?fbclid=IwZXh0bgNhZW0CMTAAAR1tdwh0zKdYZImVFGFI7jOuUvB0pGK1f4ZHiivx84vLM3giouJqiIyb1OA_aem_AZN_xoDPSC0mfOtgtC63bBoMEheiIBwvDULc9aMTGKvzxuIRKOCe617C08MI1oTxUiYvxtk-s1ViTONJLr3YA4S7",
+                "category": "negocios"
+            },
+            {
+                "id": 133,
+                "title": "Curso De Inmobiliario Facil",
+                "description": "Aprende los fundamentos del negocio inmobiliario de forma sencilla.",
+                "image": "img/133.png",
+                "link": "https://drive.google.com/drive/folders/1WxpSorsSt3OroQoa0Rm1pHANaqsVvWKi?fbclid=IwZXh0bgNhZW0CMTAAAR1Ifj9eBcIahrjY-jJVdSfockT0YioWPVhqb5lFnUXgInDwIFSGoIs9zOY_aem_AZM9csr0G9VwPEb5umnwpaf3hGJ70F0WKHWljw4ce6vH4CI1d3npqpbWN3bvX8DEeWultNmHUd4L_ZRswnQNM-2U",
+                "category": "negocios"
+            },
+            {
+                "id": 134,
+                "title": "Curso De Finanzas En 20S",
+                "description": "Domina las finanzas personales en solo 20 sesiones.",
+                "image": "img/134.png",
+                "link": "https://drive.google.com/drive/folders/14peZfkZVTRdVcZPulAQlTYguuYipKzpX?fbclid=IwZXh0bgNhZW0CMTAAAR059WIiqOV8yCbukY1AZ5Ri60s6nFXBoXRcvrp6Rt6ovyQ4AD8fWNIDeCQ_aem_AZOH0Z0rhEwlF3YCfmZmQWc5_d-J6reLWj2Lp6WW9U71tzIwZ9t4vZ_Uk-aJAaH2ZhOQUiyJGHi7tlVOcTbx-MAR",
+                "category": "negocios"
+            },
+            {
+                "id": 135,
+                "title": "Curso De Reparacion De Play 3, Play4, Xbox",
+                "description": "Aprende a reparar consolas de videojuegos populares.",
+                "image": "img/135.png",
+                "link": "https://drive.google.com/drive/folders/13K5nbde79mrB7P6wGa4cXnup33Ou75QA?fbclid=IwZXh0bgNhZW0CMTAAAR1MU6H6oshlQh5b4MiDHnBVGNqkIf8AIF5ukC1RQRNCZs8ANdvgG7rGRQ0_aem_AZPDaudK2UKu-GDkopgNlE-bCNEwZXUtlxUGgiVevx0xaXzIzcLFT-odNqCL51hSdS10Ryd17oMl_2627Qjp4fZ_",
+                "category": "electronica"
+            },
+            {
+                "id": 136,
+                "title": "Curso De Recortes Digital Para Fotografos",
+                "description": "Técnicas profesionales de recorte digital para fotógrafos.",
+                "image": "img/136.png",
+                "link": "https://drive.google.com/drive/folders/1pCErJ9Q0Nw431zOJpGOnClfn4DpG5s4U?fbclid=IwZXh0bgNhZW0CMTAAAR2z8F36Y5N5LIuZuQHIo83Vtg-FHWHGVnLXhZGlx4eDCQGJStH2u5hlbrE_aem_AZMURveOQ4I0fp80od5LjNFfIsZP53aleSUD7JJuGYbK9Ib78dobkBQbh9D_wkVHzgLAmtd3mfy87uE4ShUN90P_",
+                "category": "diseno"
+            },
+            {
+                "id": 137,
+                "title": "Curso De Implementacion De La Marca",
+                "description": "Estrategias efectivas para implementar tu marca personal o empresarial.",
+                "image": "img/137.png",
+                "link": "https://drive.google.com/drive/folders/1znUaeIwjblFFBmwVb7QIFwtkF6YmrBbL?fbclid=IwZXh0bgNhZW0CMTAAAR34SE2A1hVQkHKkEgD3ILlaLAJI2i97mjBLLrd-9g_ugVmW2ieSJpc4J1U_aem_AZOCto7zOam0Vt3VaUfoGtnra0UnmhMrE084e4Y2J8N_mSuU90iJBNb4jGpNzqmcYNLOpWI2pQO6g14HLQs2_3K4",
+                "category": "negocios"
+            },
+            {
+                "id": 138,
+                "title": "Curso De Diseño Grafico En Canva",
+                "description": "Domina el diseño gráfico utilizando la plataforma Canva.",
+                "image": "img/138.png",
+                "link": "https://drive.google.com/drive/folders/1z_APYQtZ-mWE3mNkyAc1AaoYcDYb1ojJ?fbclid=IwZXh0bgNhZW0CMTAAAR3XwfRa_SE2Bi5XJEPRFBRCPsVrtNSAcKlUtHduH5E3VSiHYFakXliSZBI_aem_AZNNqWCuSO_4QEviDzI7APPwt3tjuu6xZJ_w5V0pILMy0yJjYeLrlP-jf1wvs9B0fqyZ6CkeFhQ0wzm_WuhXDFce",
+                "category": "diseno"
+            },
+            {
+                "id": 139,
+                "title": "Como Manejar El Comportamiento De Tus Hijos",
+                "description": "Estrategias efectivas para la educación y manejo del comportamiento infantil.",
+                "image": "img/139.png",
+                "link": "https://drive.google.com/drive/folders/10JuazjqxH6RU4RpQp8eX87mPGnvq4XPu?fbclid=IwZXh0bgNhZW0CMTAAAR3pV65wXoe97bI7UEpQWo-8FAGCAy_Gy9rylOHfUH6fI69AjFywj_rReGs_aem_AZO3_JKJyMQgLGWUKpeAUAk-0bOlpiKxipkiJHiZPFiahWD6X71acny5dkoYJ32I0HjSwO83TjhwSZ4Mz2psQbGT",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 140,
+                "title": "Curso De Barista Training Online",
+                "description": "Conviértete en un experto barista con este curso completo en línea.",
+                "image": "img/140.png",
+                "link": "https://drive.google.com/drive/folders/1xtVCHnaAcZVP3fAyWcOo9F1t5mTzHOPs?fbclid=IwZXh0bgNhZW0CMTAAAR3iO1BGCzWRizjfWhY_Qwb6nnKMXAzMwwWFW675J-KfpUk313PCNSVTIDU_aem_AZMBfW0qr0IKwSFUb_RdJWdf407j2YuPqR6Gm8-pHSxziDYTsHhRoXcq0s4lSurQ89M6SDmEDphCEVv6uFJY39l7",
+                "category": "hogar"
+            },
+            {
+                "id": 141,
+                "title": "Curso De Culturismo Sin Fronteras",
+                "description": "Entrenamiento completo de culturismo para todos los niveles.",
+                "image": "img/141.png",
+                "link": "https://drive.google.com/drive/folders/1SsHKnQhz5U2EUfSY2uiX0s-pJRgrCxBg?fbclid=IwZXh0bgNhZW0CMTAAAR3hFBhFH1cI7__smQO8w4hfj-yiCULbBZ2M9p1sYhzYb0lGpXFTjelTHf8_aem_AZPpcPk1U8d_Geb4gzcvXOjvCehIJ1HN4hYQtdvFnBDe81j62AL4SsBcKqvpcpMbtltqC_yuH5QGXkVU8VNs2e1h",
+                "category": "salud"
+            },
+            {
+                "id": 142,
+                "title": "Curso De Barbershop-Hotmart",
+                "description": "Aprende técnicas profesionales de barbería.",
+                "image": "img/142.png",
+                "link": "https://drive.google.com/drive/folders/1j8U5dLb3hOkzHs3NxMdJOex1fDw7nZeG?fbclid=IwZXh0bgNhZW0CMTAAAR1wVO1wEwjMTyHO_2e06GMGj5_FLRtSmPIA4dlzjkl3D-vW7uKdxPMeXd4_aem_AZPf2Q2-j5riupVHpeYax8lN5YZ1vgXNWn2xkUw2ahvcRhv4PpAtSs5EVLad2Pi2xoXwQa1WCQGgdUc6fzxMaDKq",
+                "category": "hogar"
+            },
+            {
+                "id": 143,
+                "title": "Curso De Aprende Ingles Dialogando",
+                "description": "Método innovador para aprender inglés a través de diálogos prácticos.",
+                "image": "img/143.png",
+                "link": "https://drive.google.com/drive/folders/1plQIw8qkTtnV1kaLW41dKXq8lKJd-qrs?fbclid=IwZXh0bgNhZW0CMTAAAR3J3vN1enfyUKu9q9BNPiBZDleZcEWuxxUtu-BwPtQWxlLrXekRszbqi08_aem_AZPTsiZ5nES0DgbTa0D2bHfKikP2kJmE4BcbfhGgR3DivahA1KDlRQIqZlMfQBMv_FX5A3pn9qk9HTNn99OdBsOA",
+                "category": "idiomas"
+            },
+            {
+                "id": 144,
+                "title": "Curso De Finanzas",
+                "description": "Domina los conceptos financieros esenciales para tu vida personal y profesional.",
+                "image": "img/144.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FsAxilIRQ%23j1E2bNbAp1W09kUqIAaLAQ&sa=D&sntz=1&usg=AOvVaw2F1gm_5_arC0s2kpDjJJ5d",
+                "category": "negocios"
+            },
+            {
+                "id": 145,
+                "title": "Curso Javascript ES9, HTML, CSS3 Y Nodejs Desde Cero",
+                "description": "Aprende desarrollo web completo con las últimas tecnologías.",
+                "image": "img/145.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiGpSTDBL%23u62EYZXb7KUy9w3HX1qMaw%2Ffolder%2FzfYC3DRA&sa=D&sntz=1&usg=AOvVaw19Zx4iQUKJ8Tj9qXVrEWu1",
+                "category": "tecnologia"
+            },
+            {
+                "id": 146,
+                "title": "Curso De Creacion De Punto De Venta",
+                "description": "Aprende a crear y gestionar un punto de venta efectivo.",
+                "image": "img/146.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiGpSTDBL%23u62EYZXb7KUy9w3HX1qMaw%2Ffolder%2FqWZiFBYL&sa=D&sntz=1&usg=AOvVaw0cxYFLpug0uR3k2_7CG7df",
+                "category": "negocios"
+            },
+            {
+                "id": 147,
+                "title": "Curso De E-Commerce",
+                "description": "Domina el comercio electrónico y aumenta tus ventas en línea.",
+                "image": "img/147.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiGpSTDBL%23u62EYZXb7KUy9w3HX1qMaw%2Ffolder%2FrLQChD6Q&sa=D&sntz=1&usg=AOvVaw0HIlFuDNM2AX-82LqPC397",
+                "category": "negocios"
+            },
+            {
+                "id": 148,
+                "title": "Curso Social Media Marketing Y Estrategia Digital",
+                "description": "Estrategias avanzadas de marketing en redes sociales.",
+                "image": "img/148.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiGpSTDBL%23u62EYZXb7KUy9w3HX1qMaw%2Ffolder%2FvCRGjb4L&sa=D&sntz=1&usg=AOvVaw1nGDR9QL08wGRkCgX9WMX_",
+                "category": "negocios"
+            },
+            {
+                "id": 152,
+                "title": "Tecnico En Redes De Seguridad",
+                "description": "Conviértete en experto en redes y seguridad informática.",
+                "image": "img/152.png",
+                "link": "https://drive.google.com/drive/folders/1EUOwVQm1UDpnVhxhvFGYTsjtXbnOErOA",
+                "category": "tecnologia"
+            },
+            {
+                "id": 153,
+                "title": "Vender O Morir",
+                "description": "Estrategias radicales para aumentar tus ventas exponencialmente.",
+                "image": "img/153.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FAo9WRLwS%23pW17etpG6H_85V4hmCryHg&sa=D&sntz=1&usg=AOvVaw1rIziy7q55LwO7e-XsjxqZ",
+                "category": "negocios"
+            },
+            {
+                "id": 155,
+                "title": "Como Ganar En Criptomonedas",
+                "description": "Aprende a invertir y ganar con criptomonedas de forma segura.",
+                "image": "img/155.png",
+                "link": "https://drive.google.com/drive/folders/1NFXCKwtAMJ7HiNcEWS5oJpdqkUXoCvy4",
+                "category": "negocios"
+            },
+            {
+                "id": 156,
+                "title": "Curso De Marketing Digital Completo (2024)",
+                "description": "El curso más completo de marketing digital actualizado para 2024.",
+                "image": "img/156.png",
+                "link": "https://www.youtube.com/watch?v=v17EXDu3t0E&ab_channel=Cyberclick%E2%80%A2MarketingDigital",
+                "category": "negocios"
+            },
+            {
+                "id": 157,
+                "title": "Curso Básico De Amigurumis",
+                "description": "Aprende a crear adorables amigurumis (muñecos tejidos) desde cero.",
+                "image": "img/157.png",
+                "link": "https://www.youtube.com/watch?v=thZ5KNxBmcg&list=PLKfa5NsgvbSpEfP7a71urOiK6SPQw_KNy&ab_channel=CreativeCrochet",
+                "category": "hogar"
+            },
+            {
+                "id": 159,
+                "title": "Curso De Cultivos De Hongos",
+                "description": "Aprende las técnicas para cultivar hongos comestibles en casa.",
+                "image": "img/159.png",
+                "link": "https://www.youtube.com/watch?v=YEAyDJiEV-Q&ab_channel=SporeWorld",
+                "category": "hogar"
+            },
+            {
+                "id": 160,
+                "title": "Cursos De Bellas Artes",
+                "description": "Colección completa de cursos de bellas artes y técnicas artísticas.",
+                "image": "img/160.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2Fg6I0GRLL%23mDr5-0LuY-4YIkWYdIjlog%2Ffolder%2F86A2DB4I&sa=D&sntz=1&usg=AOvVaw1WAPkQCm6eiuzin3cdDEKR",
+                "category": "diseno"
+            },
+            {
+                "id": 162,
+                "title": "Curso Decoración De Globos",
+                "description": "Aprende técnicas profesionales para decoración con globos.",
+                "image": "img/162.png",
+                "link": "https://www.youtube.com/watch?v=ggbanIZvnSw&list=PLRycKvHT1W1slL-ZAVjn1WtMdSJSSoCNy&ab_channel=DANNADIVERMUNDO",
+                "category": "hogar"
+            },
+            {
+                "id": 163,
+                "title": "Ingles You Talk Tv",
+                "description": "Curso completo de inglés con el método You Talk TV.",
+                "image": "img/163.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fwww.1024tera.com%2Fspanish%2Fsharing%2Flink%3Fsurl%3DZ3bLbNZ5ZJ_piw02pRjCsg&sa=D&sntz=1&usg=AOvVaw2fcMgWSFLlzRFSSb_tgf5W",
+                "category": "idiomas"
+            },
+            {
+                "id": 164,
+                "title": "Copywriting Como Escribir Para Aprender Mas",
+                "description": "Domina el arte del copywriting para vender más con tus textos.",
+                "image": "img/164.png",
+                "link": "https://drive.google.com/drive/folders/1pzvDHFNCFzin9hvVUJPX841jTPiiS4uG",
+                "category": "negocios"
+            },
+            {
+                "id": 166,
+                "title": "Curso De Illustrator",
+                "description": "Aprende Adobe Illustrator desde cero hasta nivel avanzado.",
+                "image": "img/166.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1V0MPr8b6YKcZYhzZN24c3k5pNI27y3Sd",
+                "category": "diseno"
+            },
+            {
+                "id": 167,
+                "title": "Curso De Git Y Github",
+                "description": "Aprende el sistema de control de versiones Git y la plataforma GitHub.",
+                "image": "img/167.png",
+                "link": "https://youtu.be/7ylE8cm3mb0?si=-FxybeolDSgx03PD",
+                "category": "tecnologia"
+            },
+            {
+                "id": 168,
+                "title": "Git Y Github De Brais Moure",
+                "description": "Curso completo de Git y GitHub por el experto Brais Moure.",
+                "image": "img/168.png",
+                "link": "https://www.google.com/search?q=curso+de+github+gratis&rlz=1C1VDKB_enPE1040PE1040&oq=CURSO+DE+GITHU&gs_lcrp=EgZjaHJvbWUqBwgCEAAYgAQyBggAEEUYOTIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIICAUQABgWGB4yCAgGEAAYFhgeMggIBxAAGBYYHjIICAgQABgWGB4yCAgJEAAYFhge0gEJMTAyOTVqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:2d5233bb,vid:3GymExBkKjE,st:0",
+                "category": "tecnologia"
+            },
+            {
+                "id": 172,
+                "title": "Maestros Leds (Terabox)",
+                "description": "Curso completo sobre instalación y mantenimiento de sistemas LED.",
+                "image": "img/172.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2F1024terabox.com%2Fs%2F1-LRL4ddZakn-DLyiGdAN8w&sa=D&sntz=1&usg=AOvVaw18mQcQ8cwKcyrgNqS590Jm",
+                "category": "electronica"
+            },
+            {
+                "id": 173,
+                "title": "Domina Las Matemáticas",
+                "description": "Curso completo para dominar las matemáticas desde básico hasta avanzado.",
+                "image": "img/173.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FiUhHlC5I%233xvMoK7EJGXZO9SHWA7-6g&sa=D&sntz=1&usg=AOvVaw3G7m5riSMCuF7QaQQFTMRL",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 175,
+                "title": "Curso De Panaderia",
+                "description": "Aprende las técnicas profesionales de panadería artesanal.",
+                "image": "img/175.png",
+                "link": "https://drive.google.com/drive/folders/1ZF-ZwsRKPNw9hsC98NaIF58Wu96y2DQx?usp=sharing",
+                "category": "hogar"
+            },
+            {
+                "id": 176,
+                "title": "Cursos De Idiomas",
+                "description": "Colección de cursos para aprender diferentes idiomas.",
+                "image": "img/176.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FXLJViQ5D%23Om38XZy4dUPttpENMVzYcA&sa=D&sntz=1&usg=AOvVaw0AQohwBuxuQFlUH_C2YRpR",
+                "category": "idiomas"
+            },
+            {
+                "id": 181,
+                "title": "Microsoldadura",
+                "description": "Técnicas profesionales de microsoldadura para reparación de dispositivos electrónicos.",
+                "image": "img/181.png",
+                "link": "https://drive.google.com/drive/folders/1Rs-HG_EZeTjFkZl72d8DP9eCv_uQna3p?usp=sharing",
+                "category": "electronica"
+            },
+            {
+                "id": 182,
+                "title": "Curso De Electrónica Fundamentos De Electricidad Y Electrónica",
+                "description": "Aprende los fundamentos de electricidad y electrónica desde cero.",
+                "image": "img/182.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2Fe9gERDya%23PEFG26jBKsMCpleywUahBQ&sa=D&sntz=1&usg=AOvVaw1KbxAKoq3L_0e0BDz5AAr5",
+                "category": "electronica"
+            },
+            {
+                "id": 183,
+                "title": "Curso Diseño Sismico De Losas Y Vigas",
+                "description": "Especialización en diseño sísmico de elementos estructurales.",
+                "image": "img/183.png",
+                "link": "https://drive.google.com/drive/folders/1dp6DyCsNDSWFrrfWxqTrEaN_6RWf-HgA",
+                "category": "tecnologia"
+            },
+            {
+                "id": 184,
+                "title": "Curso De Facebook Ads",
+                "description": "Domina la publicidad en Facebook para potenciar tu negocio.",
+                "image": "img/184.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fmega.nz%2Ffolder%2FaeZQTIoQ%23TNMirVmvcn1jUy-lLY3mDA&sa=D&sntz=1&usg=AOvVaw3H2lxF3NEgkzyN6vY7Twk8",
+                "category": "negocios"
+            },
+            {
+                "id": 185,
+                "title": "Curso Practico De Chat GPT",
+                "description": "Aprende a utilizar ChatGPT de manera práctica para productividad.",
+                "image": "img/185.png",
+                "link": "https://drive.google.com/drive/u/0/folders/14mErF59r5pxqrRY2KVojPOrA7dRgHJP1?sort=13&direction=a",
+                "category": "tecnologia"
+            },
+            {
+                "id": 188,
+                "title": "Curso De Community Manager Completo",
+                "description": "Conviértete en un experto Community Manager con este curso completo.",
+                "image": "img/188.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1llpe3pCD8oE-w668rznA5gWUuBsX8eTx?fbclid=IwAR0ydIGaJmCuVhFolP90fFU2NC84ON4b5-4jVS22D_XH6ZhMA-fZgQ50bLs",
+                "category": "negocios"
+            },
+            {
+                "id": 189,
+                "title": "Curso De Mercado De Valores",
+                "description": "Aprende a invertir en la bolsa de valores de manera inteligente.",
+                "image": "img/189.png",
+                "link": "https://drive.google.com/drive/folders/1HgpC-aLRXCT4KIlDtZkwP7xMu4h-m0Am",
+                "category": "negocios"
+            },
+            {
+                "id": 190,
+                "title": "Curso De Cerveza Artesanal",
+                "description": "Aprende a elaborar cerveza artesanal de calidad profesional.",
+                "image": "img/190.png",
+                "link": "https://drive.google.com/drive/folders/12TWQIWnsNdQVl1ZrFPUQeGExcdOTzRgT",
+                "category": "hogar"
+            },
+            {
+                "id": 192,
+                "title": "Curso Express",
+                "description": "Colección de cursos rápidos sobre diversos temas prácticos.",
+                "image": "img/192.png",
+                "link": "https://drive.google.com/drive/folders/15oMJuwSwiEqRY9SQakG426KPM7vkeCgB?fbclid=IwY2xjawHAllFleHRuA2FlbQIxMAABHVBkS9C2qtOx2Is3Gz9fPxklZfB9K_u2kBsMGW45tjT8c7SCB6m2tZx2JA_aem_Z0ToYCMsXAaPDx2CH4XbaQ",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 193,
+                "title": "Curso De Yoga",
+                "description": "Aprende yoga desde cero y mejora tu salud física y mental.",
+                "image": "img/193.png",
+                "link": "https://sites.google.com/maxzimedia.net/maxzimedia/curso-yoga",
+                "category": "salud"
+            },
+            {
+                "id": 194,
+                "title": "Curso Completo De Elaboracion De Tesis",
+                "description": "Guía completa para la elaboración de tesis académicas.",
+                "image": "img/194.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1jvGNfhi4QqJK6LzU0d_0tN8fRa55jlzB?fbclid=IwAR2GxcbfbLqKESM8Wy8os7cDGj9DWkOqoEhVsGkAJy2XW99n3BfQXdt0FHw",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 195,
+                "title": "Curso Completo De Office 2021",
+                "description": "Domina todas las herramientas de Microsoft Office 2021.",
+                "image": "img/195.png",
+                "link": "https://drive.google.com/drive/folders/1JANwBtB90i2HJDg5pt9TInyBP-TLNCbP",
+                "category": "tecnologia"
+            },
+            {
+                "id": 196,
+                "title": "Curso De E-Commerce Con Paypal",
+                "description": "Aprende a configurar y gestionar un e-commerce con PayPal.",
+                "image": "img/196.png",
+                "link": "https://drive.google.com/drive/folders/1-Ua5JGG_zhYMq6ct6kRq3uQfQQ_T7_Kg",
+                "category": "negocios"
+            },
+            {
+                "id": 197,
+                "title": "Curso 'Aprende A Cantar'",
+                "description": "Técnicas vocales para aprender a cantar correctamente.",
+                "image": "img/197.png",
+                "link": "https://drive.google.com/drive/folders/1HQk9A9Kcq6Yntmkf3H0IAHd6qKHxtPxP",
+                "category": "musica"
+            },
+            {
+                "id": 198,
+                "title": "Curso De Trading 2",
+                "description": "Segunda parte del curso avanzado de trading en mercados financieros.",
+                "image": "img/198.png",
+                "link": "https://drive.google.com/drive/folders/11hEYMJUBdgvwQutPs5melTDHJ5bF-fq_",
+                "category": "negocios"
+            },
+            {
+                "id": 199,
+                "title": "Tecnicas Para Entrenar Tu Creatividad",
+                "description": "Ejercicios y métodos para desarrollar y potenciar tu creatividad.",
+                "image": "img/199.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1E4S4-4PwO3mPPOgYt-O7KOpC1CbWKWep",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 201,
+                "title": "Pémark Marketing",
+                "description": "Estrategias innovadoras de marketing para el siglo XXI.",
+                "image": "img/201.png",
+                "link": "https://drive.google.com/drive/folders/1eDNqypYsBiHctBGzyj5UGVTg6SzPgfps",
+                "category": "negocios"
+            },
+            {
+                "id": 202,
+                "title": "Lenguaje De Señas",
+                "description": "Aprende lenguaje de señas para comunicación inclusiva.",
+                "image": "img/202.png",
+                "link": "https://drive.google.com/drive/folders/1n1NnWp94kiHAQHkUaEE8edwNn2k4JBf0",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 203,
+                "title": "Curso Amazon FBA",
+                "description": "Guía completa para vender en Amazon con el sistema FBA.",
+                "image": "img/203.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1BZLywl_4DriRI3XjwQDff6w7-tVH8W_v",
+                "category": "negocios"
+            },
+            {
+                "id": 204,
+                "title": "Curso 'Creacion De Lamparas Con Origami De Papel'",
+                "description": "Aprende a crear lámparas decorativas con la técnica de origami.",
+                "image": "img/204.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1a_7FhRxzBnjgipxkhZR0mcofL47EXAxY",
+                "category": "hogar"
+            },
+            {
+                "id": 205,
+                "title": "Curso 'Como Hacer Un Podcast'",
+                "description": "Guía completa para crear, grabar y publicar tu propio podcast.",
+                "image": "img/205.png",
+                "link": "https://drive.google.com/drive/u/0/folders/1WDJwTjfknRyOXUSngW2eE2V74V91dIIi",
+                "category": "tecnologia"
+            },
+            {
+                "id": 206,
+                "title": "Curso 'Creacion De Libros Pop-Up'",
+                "description": "Aprende a diseñar y crear libros pop-up tridimensionales.",
+                "image": "img/206.png",
+                "link": "https://drive.google.com/drive/folders/1iM_b_3nx7SqAb3kXEk3bb3QV25Mf5021",
+                "category": "diseno"
+            },
+            {
+                "id": 207,
+                "title": "Curso Afiliado Master",
+                "description": "Conviértete en un afiliado exitoso y genera ingresos pasivos.",
+                "image": "img/207.png",
+                "link": "https://www.google.com/url?q=https%3A%2F%2Fwww.terabox.best%2Fspanish%2Fsharing%2Flink%3Fsurl%3DwVXPtNiPrZmwSKpg7w60zg&sa=D&sntz=1&usg=AOvVaw1oIRnow5OPs7e64-Kzx-rW",
+                "category": "negocios"
+            },
+            {
+                "id": 208,
+                "title": "Curso Diseño De Negocios- Domestika",
+                "description": "Aprende a diseñar modelos de negocio exitosos.",
+                "image": "img/208.png",
+                "link": "https://drive.google.com/drive/folders/1ZGQYl_XZDBGYfMoBpd_M8Mz-fMb7NJnC",
+                "category": "negocios"
+            },
+            {
+                "id": 209,
+                "title": "Curso Manejo De Las Emociones",
+                "description": "Técnicas para reconocer y gestionar eficazmente tus emociones.",
+                "image": "img/209.png",
+                "link": "https://drive.google.com/drive/folders/1oVYJxeXbD3zMBSBsjlWy4fg7yJ6iCOYS",
+                "category": "desarrollo-personal"
+            },
+            {
+                "id": 210,
+                "title": "Curso Como Vender Más Con Whatsapp 2025",
+                "description": "Estrategias actualizadas para vender más usando WhatsApp Business.",
+                "image": "img/210.png",
+                "link": "https://drive.google.com/drive/folders/1C1wHDXEeYD2Njc8CmtE9dhm5pqPgDeVZ",
+                "category": "negocios"
+            },
+            {
+                "id": 211,
+                "title": "Curso Formula De Ventas Ilimitadas",
+                "description": "Método probado para multiplicar tus ventas exponencialmente.",
+                "image": "img/211.png",
+                "link": "https://drive.google.com/drive/folders/1yIQW9PUE1Z2HbIjPxwvafWqt1S2GUJsh?usp=sharing",
+                "category": "negocios"
+            },
+            {
+                "id": 212,
+                "title": "Segundo Curso de Contabilidad",
+                "description": "Nivel intermedio-avanzado de contabilidad financiera.",
+                "image": "img/212.png",
+                "link": "https://drive.google.com/drive/folders/1I0_GYp2UPOOVneElGRcsih73H79-847s",
+                "category": "negocios"
+            },
+            {
+                "id": 213,
+                "title": "Curso Tocando Guitarra",
+                "description": "Aprende a tocar guitarra desde cero con lecciones prácticas.",
+                "image": "img/213.png",
+                "link": "https://sites.google.com/maxzimedia.net/maxzimedia/pistas-de-guitarra",
+                "category": "musica"
+            }
+        ];
+
+        function renderCourses(filter = 'all') {
+            const container = document.getElementById('coursesContainer');
+            container.innerHTML = '';
+
+            const filteredCourses = filter === 'all' 
+                ? coursesData 
+                : coursesData.filter(course => course.category === filter);
+
+            filteredCourses.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                
+                // Imagen del curso
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'course-img-container';
+                
+                const img = document.createElement('img');
+                img.src = course.image;
+                img.alt = course.title;
+                img.className = 'course-img';
+                imgContainer.appendChild(img);
+                
+                // Cuerpo del curso
+                const cardBody = document.createElement('div');
+                cardBody.className = 'course-body';
+                
+                // Badge de categoría
+                const badge = document.createElement('span');
+                badge.className = `course-badge badge-${course.category}`;
+                
+                // Asignar nombre legible a la categoría
+                let categoryName = '';
+                switch(course.category) {
+                    case 'programacion':
+                        categoryName = 'Programación';
+                        break;
+                    case 'electronica':
+                        categoryName = 'Electrónica';
+                        break;
+                    case 'ingenieria':
+                        categoryName = 'Ingeniería';
+                        break;
+                    case 'diseno':
+                        categoryName = 'Diseño';
+                        break;
+                    case 'manufactura':
+                        categoryName = 'Manufactura';
+                        break;
+                    case 'negocios':
+                        categoryName = 'Negocios';
+                        break;
+                    case 'musica':
+                        categoryName = 'Música';
+                        break;
+                    case 'idiomas':
+                        categoryName = 'Idiomas';
+                        break;
+                    case 'desarrollo-personal':
+                        categoryName = 'Desarrollo Personal';
+                        break;
+                    case 'hogar':
+                        categoryName = 'Hogar';
+                        break;
+                    case 'tecnologia':
+                        categoryName = 'Tecnología';
+                        break;
+                    case 'salud':
+                        categoryName = 'Salud';
+                        break;
+                    default:
+                        categoryName = course.category;
+                }
+                
+                badge.textContent = categoryName;
+                
+                // Título del curso
+                const title = document.createElement('h3');
+                title.className = 'course-title';
+                title.textContent = course.title;
+                
+                // Descripción del curso
+                const description = document.createElement('p');
+                description.className = 'course-description';
+                description.textContent = course.description;
+                
+                // Enlace del curso
+                const link = document.createElement('a');
+                link.href = course.link;
+                link.target = '_blank';
+                link.className = 'course-link';
+                link.innerHTML = 'Ver curso <i class="fas fa-external-link-alt"></i>';
+                
+                // Construir la tarjeta
+                cardBody.appendChild(badge);
+                cardBody.appendChild(title);
+                cardBody.appendChild(description);
+                cardBody.appendChild(link);
+                
+                card.appendChild(imgContainer);
+                card.appendChild(cardBody);
+                container.appendChild(card);
+            });
+        }
+
+        // Filtros
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                renderCourses(filterValue);
+            });
+        });
+
+        // Búsqueda
+        const searchInput = document.getElementById('courseSearchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            courseCards.forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                const description = card.querySelector('.course-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Inicializar
+        renderCourses();
+    });
+    </script>
+</body>
+</html>
